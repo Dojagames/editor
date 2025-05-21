@@ -1,6 +1,10 @@
 <template>
-  <div>
-    <NuxtRouteAnnouncer />
-    <NuxtWelcome />
-  </div>
+  <nuxt-page/>
 </template>
+<script setup lang="ts">
+onMounted(() => {
+  window.addEventListener('contextmenu', (e) => {
+    e.preventDefault()
+  })
+})
+</script>
