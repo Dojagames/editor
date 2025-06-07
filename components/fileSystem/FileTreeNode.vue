@@ -2,7 +2,7 @@
     <li>
         <div
             class="tree-item"
-            @click="toggle"
+            @click="toggle(node.id)"
             :class="{ folder: isFolder, active: isActive }"
         >
             <span v-if="isFolder">{{ open ? "📂" : "📁" }}</span>
@@ -23,6 +23,7 @@
 <script setup>
 import { ref, computed } from "vue";
 import TreeNode from "@/components/fileSystem/FileTreeNode.vue";
+import { useFileNavigation } from "@/composables/rootFunctions";
 
 const props = defineProps({
     node: {
@@ -31,12 +32,18 @@ const props = defineProps({
     },
 });
 
+const { openFile } = useFileNavigation();
+
 const open = ref(true);
 const isFolder = computed(() => props.node.type === "folder");
 const isActive = computed(() => false); // Replace with your active selection logic
 
-function toggle() {
-    if (isFolder.value) open.value = !open.value;
+function toggle(id) {
+    if (isFolder.value) {
+        open.value = !open.value;
+    } else {
+        openFile(id);
+    }
 }
 </script>
 

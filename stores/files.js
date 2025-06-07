@@ -5,13 +5,13 @@ import { mockFileTree } from "@/mock/fileTree";
 
 export const useFileStore = defineStore("file", {
   state: () => ({
-    root: mockFileTree,
-    //{
-    //  id: "root",
-    //  name: "/",
-    //  type: "folder",
-    //  children: [],
-    //},
+    root: {
+      id: "root",
+      name: "/",
+      type: "folder",
+      children: [],
+    },
+    tempfile: null,
   }),
 
   getters: {
@@ -139,6 +139,32 @@ export const useFileStore = defineStore("file", {
         file.elements[index] = { ...file.elements[index], ...updatedElement };
         file.updatedAt = new Date().toISOString();
       }
+    },
+
+    createTempFile(title = "Untitled") {
+      const now = new Date().toISOString();
+      this.tempFile = {
+        id: uuid(),
+        name: title,
+        type: "file",
+        createdAt: now,
+        updatedAt: now,
+        elements: [],
+        meta: { temp: true },
+      };
+      return this.tempFile;
+    },
+
+    commitTempFile() {
+      if (!this.tempFile) return;
+
+      this.tempFile.meta.temp = false;
+      this.root.children.push(this.tempFile);
+      this.tempFile = null;
+    },
+
+    discardTempFile() {
+      this.tempFile = null;
     },
   },
   persist: true,

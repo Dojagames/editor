@@ -2,6 +2,24 @@
 import { ref } from "vue";
 import SearchBar from "~/components/ui/searchBar.vue";
 import ContextMenu from "~/components/ui/contextMenu.vue";
+import { useFileStore } from "@/stores/files";
+
+const props = defineProps({
+    file: {
+        type: String,
+        default: "",
+    },
+});
+
+const store = useFileStore();
+
+const currentFile = computed(() => {
+    return props.file !== "temp"
+        ? store.getFileById(props.file)
+        : store.createTempFile("new Canvas");
+});
+
+console.log(currentFile.value);
 
 //state:
 const contextMenuOpen = ref(false);
@@ -10,26 +28,9 @@ const contextAbsolutePosition = ref({ x: 0, y: 0 });
 
 //const MousePos = ref({ x: 0, y: 0 });
 
-const elements = ref([
-    {
-        id: 1,
-        x: 0,
-        y: 0,
-        width: 200,
-        height: 100,
-        content: "Note 1",
-        active: false,
-    },
-    {
-        id: 2,
-        x: 500,
-        y: -300,
-        width: 150,
-        height: 80,
-        content: "Note 2",
-        active: false,
-    },
-]);
+const elements = computed(() => {
+    return currentFile.value.elements ?? [];
+});
 
 const translate = ref({ x: 0, y: 0 });
 const zoom = ref(1);

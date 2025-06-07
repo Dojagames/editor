@@ -1,11 +1,18 @@
 <script setup lang="ts">
-import Canvas from "@/components/canvas.vue";
-import Drawer from "@/components/ui/drawer-left.vue";
+import { useFileNavigation } from "@/composables/rootFunctions";
+import { useFileStore } from "@/stores/files";
+
+const store = useFileStore();
+const { openFile } = useFileNavigation();
+
+onMounted(() => {
+    const file = store.createTempFile("New Canvas");
+    openFile("temp");
+});
 </script>
 
 <template>
-    <Drawer />
-    <Canvas></Canvas>
+    <RouterView />
 </template>
 
 <style>
