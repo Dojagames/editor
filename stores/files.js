@@ -1,14 +1,17 @@
 import { defineStore } from "pinia";
 import { v4 as uuid } from "uuid";
 
+import { mockFileTree } from "@/mock/fileTree";
+
 export const useFileStore = defineStore("file", {
   state: () => ({
-    root: {
-      id: "root",
-      name: "/",
-      type: "folder",
-      children: [],
-    },
+    root: mockFileTree,
+    //{
+    //  id: "root",
+    //  name: "/",
+    //  type: "folder",
+    //  children: [],
+    //},
   }),
 
   getters: {
@@ -45,6 +48,42 @@ export const useFileStore = defineStore("file", {
 
       walk(state.root);
       return results;
+    },
+
+    getFileTreeFilteredByName: (state) => (searchString) => {
+      const lowerSearch = searchString.toLowerCase();
+
+      function filterNode(node) {
+        if (node.type === "file") {
+          return node.name.toLowerCase().includes(lowerSearch)
+            ? { ...node }
+            : null;
+        }
+
+        if (node.type === "folder") {
+          const filteredChildren = node.children
+            .map(filterNode)
+            .filter(Boolean);
+
+          return filteredChildren.length > 0
+            ? {
+                ...node,
+                children: filteredChildren,
+              }
+            : null;
+        }
+
+        return null;
+      }
+
+      return (
+        filterNode(state.root) || {
+          id: "root",
+          name: "/",
+          type: "folder",
+          children: [],
+        }
+      );
     },
   },
 
@@ -102,4 +141,5 @@ export const useFileStore = defineStore("file", {
       }
     },
   },
+  persist: true,
 });
