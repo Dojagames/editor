@@ -1,4 +1,4 @@
-# 🧠 InfinityCanvas — A File-Based Visual Notes App (Nuxt + Vue + Pinia)
+# 🧠 OrganiZ — A File-Based Visual Notes App (Nuxt + Vue + Pinia)
 
 > A highly extensible, offline-first, real-time collaborative note-taking system  
 > Inspired by [Notion](https://www.notion.so/) and [Obsidian](https://obsidian.md/), powered by a file/folder structure and canvas-like infinite space.
