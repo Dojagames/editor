@@ -148,6 +148,14 @@ function createObject(type, pos) {
             </div>
         </div>
     </div>
+
+    <button
+        v-if="props.file === 'temp'"
+        @click="store.commitTempFile()"
+        id="saveBtn"
+    >
+        save
+    </button>
 </template>
 
 <style scoped>
@@ -192,5 +200,21 @@ function createObject(type, pos) {
     padding: 10px;
     box-sizing: border-box;
     z-index: 1;
+}
+#saveBtn {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+
+    outline: none;
+    border: 1px solid white;
+    border-radius: 10%;
+
+    background: transparent;
+    color: white;
+    font-size: 2rem;
+    padding: 0.2rem 0.5rem;
+
+    cursor: pointer;
 }
 </style>

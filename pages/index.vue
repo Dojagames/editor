@@ -7,6 +7,7 @@ const { openFile } = useFileNavigation();
 
 onMounted(() => {
     const file = store.createTempFile("New Canvas");
+    console.log("restored root:", store.root);
     openFile("temp");
 });
 </script>
