@@ -19,21 +19,35 @@
 
 ## 📁 Project Structure
 
-.
+
 ├── assets/
+
 │ └── css/ # Global styles
+
 ├── components/
+
 │ └── TreeNode.vue # Recursive file/folder UI
+
 ├── composables/
+
 ├── layouts/
+
 ├── pages/
+
 │ └── index.vue # Root canvas entry
+
 ├── plugins/
+
 │ └── pinia-persist.client.ts
+
 ├── stores/
+
 │ └── files.js # Pinia store for file structure and elements
+
 ├── public/
+
 ├── nuxt.config.ts
+
 └── README.md
 
 
