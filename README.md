@@ -1,75 +1,66 @@
-# Nuxt Minimal Starter
+# 🧠 InfinityCanvas — A File-Based Visual Notes App (Nuxt + Vue + Pinia)
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+> A highly extensible, offline-first, real-time collaborative note-taking system  
+> Inspired by [Notion](https://www.notion.so/) and [Obsidian](https://obsidian.md/), powered by a file/folder structure and canvas-like infinite space.
 
-## Setup
+---
 
-Make sure to install dependencies:
+## ✨ Features
+
+- 🎨 **Canvas-Based Editor** — Infinite 2D space, draggable & resizable components
+- 🗃 **Filesystem Structure** — Folders can contain files or other folders
+- 📝 **Typed Elements** — Text, images, links, references, and more
+- 🔍 **Search & Tagging** — Full-text and tag-based element search
+- 💾 **Persistent State** — Uses localStorage for offline support
+- 📡 **Real-Time Collaboration** *(planned)* — via `socket.io`
+- 🌐 **SPA-Mode Nuxt App** — Optimized for offline-first usage
+
+---
+
+## 📁 Project Structure
+
+.
+├── assets/
+│ └── css/ # Global styles
+├── components/
+│ └── TreeNode.vue # Recursive file/folder UI
+├── composables/
+├── layouts/
+├── pages/
+│ └── index.vue # Root canvas entry
+├── plugins/
+│ └── pinia-persist.client.ts
+├── stores/
+│ └── files.js # Pinia store for file structure and elements
+├── public/
+├── nuxt.config.ts
+└── README.md
+
+
+---
+
+## 🛠 Tech Stack
+
+- [Nuxt 3](https://nuxt.com/)
+- [Vue 3 Composition API](https://vuejs.org/)
+- [Pinia Store](https://pinia.vuejs.org/)
+- [pinia-plugin-persistedstate](https://github.com/prazdevs/pinia-plugin-persistedstate)
+- [uuid](https://www.npmjs.com/package/uuid)
+
+---
+
+## 🚀 Getting Started
 
 ```bash
-# npm
+# Install dependencies
 npm install
 
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
+# Start development server
 npm run dev
 
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
+# Build for production
 npm run build
 
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
+# Preview production build
 npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
 ```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
