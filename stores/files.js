@@ -103,7 +103,7 @@ export const useFileStore = defineStore("file", {
       });
     },
 
-    addFolder(parentFolderId, name = "New Folder") {
+    addFolder(parentFolderId = "root", name = "New Folder") {
       const parent = this.getFolderById(parentFolderId);
       if (!parent || parent.type !== "folder") return;
 
@@ -138,6 +138,22 @@ export const useFileStore = defineStore("file", {
       if (index !== -1) {
         file.elements[index] = { ...file.elements[index], ...updatedElement };
         file.updatedAt = new Date().toISOString();
+      }
+    },
+
+    renameFile(id, newName) {
+      const file = this.getFileById(id);
+      if (file && file.type === "file") {
+        file.name = newName;
+        file.updatedAt = new Date().toISOString();
+      }
+    },
+
+    renameFolder(id, newName) {
+      const folder = this.getFolderById(id);
+      if (folder && folder.type === "folder") {
+        folder.name = newName;
+        folder.updatedAt = new Date().toISOString();
       }
     },
 
